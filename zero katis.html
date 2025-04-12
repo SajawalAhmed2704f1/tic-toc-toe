@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0%;
+            padding: 0%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .container{
+            margin: auto;
+            width: 35%;
+            height: 400px;
+            background-color: blue;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-top: 20px;
+            border-radius: 15px;
+
+        }
+        .container~h1{
+            margin-top: 20px;
+        }
+        .box{
+            border-radius: 15px;
+            width: 30%;
+            height: 120px;
+            font-size: 45px;
+            background-color: white;
+        }
+        #Restart{
+            margin-top: 25px ;
+            width: 150px;
+            height: 40px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+        <div class="container">
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+        </div>
+        <h1>winner <span id="winner"></span></h1>
+        <button id="Restart">Restart</button>
+    
+    <script>
+        var boxes = document.querySelectorAll(".box")
+        let start_value= true
+         
+        boxes.forEach((box) => {
+            box.addEventListener("click", ()=>{
+                if (start_value===true) {
+                    box.innerText="O"
+                    start_value= false
+                    box.disabled=true
+                    box.style.backgroundColor = "red"
+                    box.style.border ="2px solid white"
+                    box.style.color="black"
+                } else {
+                    box.innerText="X"
+                    start_value= true
+                    box.disabled=true
+                    box.style.backgroundColor = "red"
+                    box.style.border ="2px solid white"
+                    box.style.color="black"
+                }
+                checkwinner()
+            })
+        });
+
+        var Restart = document.getElementById("Restart")
+            Restart.addEventListener("click", ()=>{
+                for (const box of boxes) {
+                    box.disabled= false
+                    box.innerText=""
+                    box.style.backgroundColor="white"
+                }
+                winner.innerText = ""
+                start_value= true
+            });
+
+        const winnerpatt = [
+            [0,1,2],
+            [3,4,5],
+            [6,7,8],
+            [0,3,6],
+            [1,4,7],
+            [2,5,8],
+            [0,4,8],
+            [2,4,6]
+        ];
+
+        function enable() {
+            for (const box of boxes) {
+                    box.disabled= false
+                    box.innerText= ""
+                    box.style.backgroundColor = "white"
+                }
+        }
+
+        var winner =  document.getElementById("winner")
+            function checkwinner() {
+                for (const values of winnerpatt) {
+                    let num1 = boxes[values[0]].innerText;
+                    let num2 = boxes[values[1]].innerText ;
+                    let num3 = boxes[values[2]].innerText;
+                    
+                    if (num1!="" && num2!="" && num3!="") {
+                        if (num1===num2 && num2===num3) {
+                            winner.innerText = num1
+                            
+                        } 
+                    
+                    }
+
+                }
+            };
+    </script>
+</body>
+</html>
