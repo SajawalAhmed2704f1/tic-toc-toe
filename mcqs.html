@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        body {
+            height: 100vh;
+            background: linear-gradient(15deg, rgb(113, 26, 184), rgb(7, 7, 201));
+        }
+
+        .S-con,
+        .E-con {
+            width: 40%;
+            height: 300px;
+            background-color: blue;
+            margin: auto;
+            margin-top: 50px;
+            text-align: center;
+            padding: 30px;
+            border: 5px solid rgb(255, 255, 255);
+            border-radius: 20px;
+        }
+
+        .E-con {
+            display: none;
+        }
+
+        .S-con>h1,
+        .E-con>h1 {
+            font-size: 35px;
+            color: white;
+        }
+
+        .S-con p,
+        .E-con p {
+            margin-top: 20px;
+            font-size: 25px;
+            color: white;
+        }
+
+        #S-Exam {
+            width: 150px;
+            height: 40px;
+            border-radius: 50px;
+            background-color: burlywood;
+            margin-top: 15px;
+            border: 0px;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 200px;
+            height: 30px;
+            border: 0px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="S-con">
+        <h1>One MCQs Solution</h1>
+        <p>Name : Sajawal</p>
+        <p>Student 1590274</p>
+        <p>Batch: 2407f1</p>
+        <button id="S-Exam">Start Exam</button>
+    </div>
+
+    <div class="E-con">
+        <h1>Qno 1</h1>
+        <p>What is the full form of HTML?</p>
+        <button onclick="checkanswer(this, 'A')">Cascading Style Sheet</button>
+        <button onclick="checkanswer(this, 'B')">Hyper Text Markup Language</button>
+        <button onclick="checkanswer(this, 'C')">JavaScript</button>
+        <button onclick="checkanswer(this, 'D')">JSON</button>
+        <p>Attempt: <span id="value"></span>/3</p>
+    </div>
+
+    <script>
+        var S_Con = document.getElementsByClassName("S-con")
+        var E_Con = document.getElementsByClassName("E-con")
+        var attemps = document.getElementById("value")
+        S_Con[0].addEventListener("click", () => {
+            E_Con[0].style.display = "block"
+            S_Con[0].style.display = "none"
+        })
+
+        const CorrectAnswer = "B"
+        attmp = 0
+        function checkanswer(button, answer) {
+            if (answer === CorrectAnswer) {
+                button.style.backgroundColor ="Green"
+                button.style.color ="White"
+                alert("Answer is correct")
+                disablebtn()
+            } else {
+                attmp++
+                button.style.backgroundColor ="Red"
+                button.style.color ="White"
+                button.disabled = true
+                attemps.innerText = attmp
+                if (attmp == 3) {
+                    disablebtn()
+                }
+            }
+        }
+
+        function disablebtn() {
+            var btn = document.querySelectorAll("button")
+            for (const btns of btn) {
+                btns.disabled = true
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
